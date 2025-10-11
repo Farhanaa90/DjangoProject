@@ -70,7 +70,6 @@ class SimpleRegistrationForm(UserCreationForm):
         user.set_password(self.cleaned_data['password1'])
         if commit:
             user.save()
-            # Create or update user profile with selected user_type
             profile, created = UserProfile.objects.get_or_create(user=user)
             profile.user_type = self.cleaned_data['user_type']
             profile.save()
