@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-10 mb-10">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+        <div class="text-center mb-6">
+            <i class="fas fa-sign-in-alt text-blue-600 text-4xl mb-3"></i>
+            <h2 class="text-3xl font-bold text-blue-800">Welcome Back</h2>
+            <p class="text-gray-600 mt-2">Login to your Share4Care account</p>
+        </div>
+
+        {% if form.errors %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <strong>Error:</strong> Invalid username or password. Please try again.
+        </div>
+        {% endif %}
+
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                <input type="text" name="username" id="id_username" required autofocus
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       placeholder="Enter your username">
+            </div>
+
+            <div>
+                <label for="id_password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <input type="password" name="password" id="id_password" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold">
+                <i class="fas fa-sign-in-alt mr-2"></i> Login
+            </button>
+        </form>
+
+        <hr class="my-6">
+
+        <p class="text-center text-gray-600">
+            Don't have an account?
+            <a href="{% url 'register' %}" class="text-blue-600 hover:text-blue-800 font-semibold">Sign up here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
