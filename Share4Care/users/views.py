@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import UserProfile
+import os
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -30,12 +34,16 @@ def register(request):
 
         login(request, user)
         messages.success(request, 'Registration successful! Welcome to Share4Care!')
-        return redirect('home')
+        return redirect('dashboard')
     return render(request, 'register.html')
+
+
 def home(request):
     return render(request, 'home.html')
+
 
 def logout_view(request):
     logout(request)
     messages.success(request, 'You have been logged out!')
     return redirect('home')
+
